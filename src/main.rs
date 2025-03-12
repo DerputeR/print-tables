@@ -1,6 +1,6 @@
 use std::fmt::Alignment;
 use comfy_table::{modifiers::{UTF8_ROUND_CORNERS, UTF8_SOLID_INNER_BORDERS}, presets::*, ContentArrangement, Table};
-use tabled::{builder::Builder, settings::{measurement::Percent, themes::Colorization, Color, Style, Theme, Width}};
+use tabled::{builder::Builder, settings::{measurement::Percent, themes::Colorization, Color, Style, Width}};
 
 pub struct TableFormatOptions {
     padding: u8,
@@ -30,7 +30,7 @@ pub fn stringify_table<T>(table: &[T], row_size: u32, format_options: &TableForm
 
 #[cfg(test)]
 mod tests {
-    use super::*;
+    
 
 
 }
