@@ -1,6 +1,6 @@
 use std::fmt::Alignment;
-use comfy_table::{modifiers::{UTF8_ROUND_CORNERS, UTF8_SOLID_INNER_BORDERS}, presets::*, ContentArrangement, Table};
-use tabled::{builder::Builder, settings::{measurement::Percent, themes::Colorization, Color, Style, Width}};
+use comfy_table::{modifiers::{UTF8_ROUND_CORNERS, UTF8_SOLID_INNER_BORDERS}, presets::*, Cell, ContentArrangement, Table};
+use tabled::{builder::Builder, settings::{measurement::Percent, object::Rows, themes::Colorization, Color, Style, Width}};
 
 pub struct TableFormatOptions {
     padding: u8,
@@ -43,27 +43,30 @@ fn main() {
      ];
     let mut table = Table::new();
     table
-        .load_preset(NOTHING)
+        .load_preset(ASCII_FULL_CONDENSED)
         .set_content_arrangement(ContentArrangement::Dynamic)
         .set_header(&header)
         .add_rows(&contents);
-
-    println!("{table}\n\n");
-    table.load_preset(ASCII_FULL_CONDENSED);
     println!("{table}\n\n");
     table.load_preset(UTF8_FULL);
     println!("{table}\n\n");
     table.apply_modifier(UTF8_ROUND_CORNERS).apply_modifier(UTF8_SOLID_INNER_BORDERS);
     println!("{table}\n\n");
+    table.load_preset(NOTHING);
+    println!("{table}\n\n");
 
-    let mut table_builder = Builder::new();
-    table_builder.push_record(header.clone());
-    table_builder.push_record(contents[0].clone());
-    let mut table2 = table_builder.build();
-    table2.with(Style::sharp());
-    table2.with(Width::wrap(Percent(100)));
-    println!("{table2}");
-    table2.with(Style::empty());
-    table2.with(Colorization::by_row([Color::BG_WHITE]));
-    println!("{table2}");
+    let mut table2 = Table::new();
+    let mut header2 = Vec::<Cell>::new();
+    for i in header {
+        header2.push(Cell::new(&i).add_attribute(comfy_table::Attribute::Reverse));
+    }
+
+    table2.load_preset(NOTHING)
+        .set_content_arrangement(ContentArrangement::Dynamic)
+        .set_header(header2)
+        .add_rows(&contents)
+        // .add_row(vec![Cell::new("Test!").add_attribute(comfy_table::Attribute::SlowBlink)])
+        ;
+
+    println!("{table2}\n\n");
 }
