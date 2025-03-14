@@ -69,5 +69,6 @@ fn main() {
         // .add_row(vec![Cell::new("Test!").add_attribute(comfy_table::Attribute::SlowBlink)])
         ;
 
-    println!("{table2}\n\n");
+    let stringed = format!("{table2}\n\n");
+    println!("{}", stringed);
 }
