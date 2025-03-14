@@ -36,10 +36,11 @@ mod tests {
 }
 
 fn main() {
-    let header = vec!["Name", "PID", "Uptime", "Message", "Status"];
+    let header = vec!["Name", "UID", "Uptime", "Message", "Status"];
     let contents = vec![
-        vec!["gtrand2", "71", "21.100 seconds", "starting! this is also a really long message but we won't try doing manual line breaks with it on purpose", "Running"],
-        vec!["gtrand", "73", "21.146 seconds", "starting!", "Running"]
+        vec!["ssh_server", "71", "21.100 seconds", "starting! this is also a really long message but we won't try doing manual line breaks with it on purpose", "Running"],
+        vec!["steamcmd", "73", "21.146 seconds", "starting!", "Running"],
+        vec!["fax_server", "88", "1.411 seconds", "", "Stopped"],
      ];
     let mut table = Table::new();
     table
